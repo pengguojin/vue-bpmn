@@ -1,0 +1,214 @@
+$baseColor: #167CF3;
+$fontColor: #8c8484;
+$user-task: '../assets/userTask.png';
+$service-task: '../assets/serviceTask.png';
+$start-event: '../assets/start.png';
+$end-event: '../assets/end.png';
+$parallel-gateway: '../assets/parallelGateway.png';
+$exclusive-gateway: '../assets/exclusiveGateway.png';
+$inclusive-gateway: '../assets/inclusiveGateway.png';
+$delete: '../assets/delete.png';
+$hand-tool: '../assets/hand.png';
+$lasso-tool: '../assets/lasso.png';
+$space-tool: '../assets/space.png';
+$connection-tool: '../assets/connection.png';
+$group: '../assets/group.png';
+$datasource: '../assets/datasource.png';
+
+// 全局样式
+html {
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 0;
+    padding: 0;
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+        width: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 5px rgba(35, 46, 64, 0.05);
+        background: rgba(35, 46, 64, 0.05);
+    }
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+    }
+    :hover::-webkit-scrollbar-thumb {
+        width: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 5px rgba(35, 46, 64, 0.05);
+        background: rgba(35, 46, 64, 0.1);
+    }
+    :hover::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+}
+
+@mixin font {
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    left: 40px;
+    white-space: nowrap;
+    color: $fontColor;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+}
+
+.icon-custom {
+    border-radius: 50%;
+    background-size: 65%;
+    background-repeat: no-repeat;
+    background-position: center;
+    &.user-task {
+        background-image: url($user-task);
+        &::after {
+            content: '\7528\6237\4efb\52a1';
+            @include font
+        }
+    }
+    &.service-task {
+        background-image: url($service-task);
+        &::after {
+            content: '\670d\52a1\4efb\52a1';
+            @include font
+        }
+    }
+    &.start-event {
+        background-image: url($start-event);
+        &::after {
+            content: '\5f00\59cb\4e8b\4ef6';
+            @include font
+        }
+    }
+    &.end-event {
+        background-image: url($end-event);
+        &::after {
+            content: '\7ed3\675f\4e8b\4ef6';
+            @include font
+        }
+    }
+    &.parallel-gateway {
+        background-image: url($parallel-gateway);
+        &::after {
+            content: '\5e76\884c\7f51\5173';
+            @include font
+        }
+    }
+    &.exclusive-gateway {
+        background-image: url($exclusive-gateway);
+        &::after {
+            content: '\6392\4ed6\7f51\5173';
+            @include font
+        }
+    }
+    &.inclusive-gateway {
+        background-image: url($inclusive-gateway);
+        &::after {
+            content: '\5305\5bb9\7f51\5173';
+            @include font
+        }
+    }
+    &.delete {
+        background-image: url($delete);
+    }
+    &.hand-tool {
+        background-image: url($hand-tool);
+        &::after {
+            content: '\624b\52a8\5de5\5177';
+            @include font
+        }
+    }
+    &.lasso-tool {
+        background-image: url($lasso-tool);
+        &::after {
+            content: '\5957\7d22\5de5\5177';
+            @include font
+        }
+    }
+    &.space-tool {
+        background-image: url($space-tool);
+        &::after {
+            content: '\7a7a\95f4\5de5\5177';
+            @include font
+        }
+    }
+    &.connection-tool {
+        background-image: url($connection-tool);
+        &::after {
+            content: '\8fde\63a5\5de5\5177';
+            @include font
+        }
+    }
+    &.group {
+        background-image: url($group);
+        &::after {
+            content: '\521b\5efa\7ec4';
+            @include font
+        }
+    }
+    &.datasource {
+        background-image: url($datasource);
+    }
+}
+
+.djs-context-pad .user-task.entry:hover {
+    background: url($user-task) center no-repeat !important;
+    background-size: cover !important;
+}
+.djs-context-pad .end-event.entry:hover {
+    background: url($end-event) center no-repeat !important;
+    background-size: cover !important;
+}
+.djs-context-pad .parallel-gateway.entry:hover {
+    background: url($parallel-gateway) center no-repeat !important;
+    background-size: cover !important;
+}
+.djs-context-pad .exclusive-gateway.entry:hover {
+    background: url($exclusive-gateway) center no-repeat !important;
+    background-size: cover !important;
+}
+.djs-context-pad .inclusive-gateway.entry:hover {
+    background: url($inclusive-gateway) center no-repeat !important;
+    background-size: cover !important;
+}
+.djs-context-pad .delete.entry:hover {
+    background: url($delete) center no-repeat !important;
+    background-size: cover !important;
+}
+.djs-context-pad .entry:hover {
+    border: 1px solid $baseColor;
+}
+
+.djs-context-pad .entry {
+    box-sizing: border-box;
+    background-size: 100%;
+    transition: all 0.3s;
+}
+
+.djs-palette .entry {
+    float: none!important;
+    position: relative;
+}
+
+.djs-palette .entry, .djs-palette .djs-palette-toggle {
+    cursor: pointer!important;
+    width: 35px!important;
+    height: 35px!important;
+}
+
+.djs-palette .entry:before {
+    color: $baseColor!important;
+}
+
+.djs-palette {
+    width: 150px!important;
+    bottom: 20px;
+    overflow: auto;
+}
