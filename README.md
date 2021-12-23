@@ -1,18 +1,18 @@
-# vue-bpmn-basic
+# 基于vue+bpmn.js改造的流程引擎编辑器
 
-## Project setup
+## 下载依赖
 ```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
+yarn install或者npm i
 ```
 
-### Compiles and minifies for production
+### 启动
 ```
-yarn build
+yarn serve或者npm run serve
+```
+
+### 编译打包
+```
+yarn build或者npm run build
 ```
 
 ### Lints and fixes files
