@@ -103,16 +103,6 @@ body {
     .entry:hover {
         border: 1px solid $baseColor;
     }
-}
-
-.icon-pad .user-task {
-    background-image: url($user-task);
-}
-
-.icon-pad {
-    .user-task {
-        background-image: url($user-task);
-    }
     @each $name, $url in
                     (user-task, $user-task),
                     (end-event, $end-event),
@@ -130,7 +120,6 @@ body {
         }
     }
 }
-
 
 .djs-palette {
     width: 150px!important;

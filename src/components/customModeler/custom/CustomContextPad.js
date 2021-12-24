@@ -37,32 +37,15 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
 
     const actions = {};
 
-    assign(actions, {
-        'append.user-task': createAction(
-            'bpmn:UserTask', 'task', 'icon-pad user-task',
-            '创建一个用户任务'
-        )
-    }, {
-        'append.end-event': createAction(
-            'bpmn:EndEvent', 'event', 'icon-pad end-event',
-            '创建一个结束节点'
-        )
-    }, {
-        'append.parallel-gateway': createAction(
-            'bpmn:ParallelGateway', 'gateway', 'icon-pad parallel-gateway',
-            '创建一个并行网关'
-        )
-    }, {
-        'append.exclusive-gateway': createAction(
-            'bpmn:ExclusiveGateway', 'gateway', 'icon-pad exclusive-gateway',
-            '创建一个排他网关'
-        )
-    }, {
-        'delete': deleteElement()
-    }, {
-        'connect': {
+    assign(actions, { 'append.user-task': createAction('bpmn:UserTask', 'task', 'user-task', '创建一个用户任务') },
+        { 'append.end-event': createAction('bpmn:EndEvent', 'event', 'end-event', '创建一个结束节点')},
+        { 'append.parallel-gateway': createAction('bpmn:ParallelGateway', 'gateway', 'parallel-gateway','创建一个并行网关')},
+        { 'append.exclusive-gateway': createAction('bpmn:ExclusiveGateway', 'gateway', 'exclusive-gateway', '创建一个排他网关')},
+        { 'delete': deleteElement() },
+        {
+            'connect': {
             group: 'group',
-            className: 'icon-custom connection-tool',
+            className: 'connection-tool',
             title: '连线工具',
             action: {
                 click: startConnect,
@@ -91,6 +74,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     function removeElement() {
         modeling.removeElements([element])
     }
+
     function createAction(type, group, className, title, options) {
         function click(event, element) {
             if (autoPlace) {

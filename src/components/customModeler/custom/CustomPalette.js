@@ -104,7 +104,7 @@ PaletteProvider.prototype.getPaletteEntries = function() {
             title: '激活全局连接工具',
             action: {
                 click: function(event) {
-                    globalConnect.start(event);
+                    globalConnect.toggle(event);
                 }
             }
         },

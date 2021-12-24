@@ -1,7 +1,7 @@
 import BaseRenderer from 'diagram-js/lib/draw/BaseRenderer';
 
 import {append as svgAppend, create as svgCreate} from 'tiny-svg';
-import {customConfig, customElements, hasLabelElements} from '../../../utils/util'
+import {customConfig, customElements, hasLabelElements} from '@/utils/util'
 
 const HIGH_PRIORITY = 1500
 
@@ -20,7 +20,7 @@ export default class CustomRenderer extends BaseRenderer {
 
     drawShape(parentNode, element) {
         const type = element.type // 获取到类型
-        if (customElements.includes(type)) { // or customConfig[type]
+        if (customElements.includes(type)) {
             const { url, attr } = customConfig[type]
             const customIcon = svgCreate('image', {
                 ...attr,

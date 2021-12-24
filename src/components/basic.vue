@@ -1,5 +1,7 @@
 <template>
   <div class="containers">
+    <el-button @click="saveXml">查看xml</el-button>
+    <el-button @click="addElement">测试更新元素</el-button>
     <div class="canvas" ref="canvas"></div>
   </div>
 </template>
@@ -7,7 +9,7 @@
 <script>
 // 引入相关的依赖
 import CustomModeler from './customModeler'
-import { xmlStr } from '../mock/xmlStr' // 这里是直接引用了xml字符串
+import { xmlStr } from '@/mock/xmlStr' // 这里是直接引用了xml字符串
 // const bpmnXml = require('../mock/diagram.bpmn')
 import flowableModule from '../mock/flowable.json'
 // import Modeler from 'bpmn-js/lib/Modeler'
@@ -48,10 +50,11 @@ export default {
       if (info.warnings && info.warnings.length > 0) {
         console.error('出错', info)
       } else {
-        // 监听 modeler
+        // // 监听 modeler
         // this.addModelerListener()
         // 监听 element
-        // this.addEventBusListener()
+        this.addEventBusListener()
+
       }
     },
     addModelerListener() {
@@ -75,9 +78,25 @@ export default {
     addEventBusListener () {
       const eventBus = this.bpmnModeler.get('eventBus') // 需要使用eventBus
       const eventTypes = ['element.click', 'element.changed'] // 需要监听的事件集合
+      const elementRegistry = this.bpmnModeler.get('elementRegistry');
+      const modeling = this.bpmnModeler.get('modeling')
+      const moddle = this.bpmnModeler.get('moddle')
       eventTypes.forEach(eventType => {
-        eventBus.on(eventType, () => {
-          // console.log(eventType, e)
+        eventBus.on(eventType, (e) => {
+          if (eventType === 'element.click') {
+            const shape = e.element ? elementRegistry.get(e.element.id) : e.shape;
+            if (shape.type === "bpmn:UserTask") {
+              // 在UserTask节点上添加/修改元素
+              modeling.updateProperties(shape, {
+                "flowable:assignee": '我是修改后的Task名称'
+              })
+
+              //在UserTask节点内部添加/修改元素
+              const properties = moddle.create('flowable:Button', { value: '1', label: '测试', display: false })
+              modeling.updateProperties(shape, { documentation: [properties]})
+            }
+
+          }
         })
       })
     },
@@ -88,6 +107,10 @@ export default {
       } catch (err) {
         console.error(err)
       }
+    },
+    addElement() {
+      // const modeling = this.bpmnModeler.get('modeling')
+      // modeling.updateProperties(this.element, properties)
     }
   }
 }
@@ -103,11 +126,11 @@ export default {
   width: 100%;
   height: 100%;
 }
-.panel{
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 300px;
-}
+/*.panel{*/
+/*  position: absolute;*/
+/*  right: 0;*/
+/*  top: 0;*/
+/*  width: 300px;*/
+/*}*/
 
 </style>
