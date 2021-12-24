@@ -13,7 +13,7 @@ $lasso-tool: '../assets/lasso.png';
 $space-tool: '../assets/space.png';
 $connection-tool: '../assets/connection.png';
 $group: '../assets/group.png';
-$datasource: '../assets/datasource.png';
+$subprocess: '../assets/subprocess.png';
 
 // 全局样式
 html {
@@ -66,149 +66,89 @@ body {
     background-size: 65%;
     background-repeat: no-repeat;
     background-position: center;
-    &.user-task {
-        background-image: url($user-task);
-        &::after {
-            content: '\7528\6237\4efb\52a1';
-            @include font
-        }
-    }
-    &.service-task {
-        background-image: url($service-task);
-        &::after {
-            content: '\670d\52a1\4efb\52a1';
-            @include font
-        }
-    }
-    &.start-event {
-        background-image: url($start-event);
-        &::after {
-            content: '\5f00\59cb\4e8b\4ef6';
-            @include font
-        }
-    }
-    &.end-event {
-        background-image: url($end-event);
-        &::after {
-            content: '\7ed3\675f\4e8b\4ef6';
-            @include font
-        }
-    }
-    &.parallel-gateway {
-        background-image: url($parallel-gateway);
-        &::after {
-            content: '\5e76\884c\7f51\5173';
-            @include font
-        }
-    }
-    &.exclusive-gateway {
-        background-image: url($exclusive-gateway);
-        &::after {
-            content: '\6392\4ed6\7f51\5173';
-            @include font
-        }
-    }
-    &.inclusive-gateway {
-        background-image: url($inclusive-gateway);
-        &::after {
-            content: '\5305\5bb9\7f51\5173';
-            @include font
+    @each $name,$url,$content in
+                    (user-task, $user-task, '\7528\6237\4efb\52a1'),
+                    (service-task, $service-task, '\670d\52a1\4efb\52a1'),
+                    (start-event, $start-event, '\5f00\59cb\4e8b\4ef6'),
+                    (end-event, $end-event, '\7ed3\675f\4e8b\4ef6'),
+                    (parallel-gateway, $parallel-gateway, '\5e76\884c\7f51\5173'),
+                    (exclusive-gateway, $exclusive-gateway, '\6392\4ed6\7f51\5173'),
+                    (inclusive-gateway, $inclusive-gateway, '\5305\5bb9\7f51\5173'),
+                    (hand-tool, $hand-tool, '\624b\52a8\5de5\5177'),
+                    (lasso-tool, $lasso-tool, '\5957\7d22\5de5\5177'),
+                    (space-tool, $space-tool, '\7a7a\95f4\5de5\5177'),
+                    (connection-tool, $connection-tool, '\8fde\63a5\5de5\5177'),
+                    (group, $group, '\521b\5efa\7ec4'),
+                    (subprocess, $subprocess, '\521b\5efa\5b50\6d41\7a0b')
+    {
+        &.#{$name} {
+            background-image: url($url);
+            &::after {
+                content: $content;
+                @include font
+            }
         }
     }
     &.delete {
         background-image: url($delete);
     }
-    &.hand-tool {
-        background-image: url($hand-tool);
-        &::after {
-            content: '\624b\52a8\5de5\5177';
-            @include font
-        }
+}
+
+.djs-context-pad {
+    .entry {
+        box-sizing: border-box;
+        background-size: 100%;
+        transition: all 0.3s;
     }
-    &.lasso-tool {
-        background-image: url($lasso-tool);
-        &::after {
-            content: '\5957\7d22\5de5\5177';
-            @include font
-        }
-    }
-    &.space-tool {
-        background-image: url($space-tool);
-        &::after {
-            content: '\7a7a\95f4\5de5\5177';
-            @include font
-        }
-    }
-    &.connection-tool {
-        background-image: url($connection-tool);
-        &::after {
-            content: '\8fde\63a5\5de5\5177';
-            @include font
-        }
-    }
-    &.group {
-        background-image: url($group);
-        &::after {
-            content: '\521b\5efa\7ec4';
-            @include font
-        }
-    }
-    &.datasource {
-        background-image: url($datasource);
+    .entry:hover {
+        border: 1px solid $baseColor;
     }
 }
 
-.djs-context-pad .user-task.entry:hover {
-    background: url($user-task) center no-repeat !important;
-    background-size: cover !important;
-}
-.djs-context-pad .end-event.entry:hover {
-    background: url($end-event) center no-repeat !important;
-    background-size: cover !important;
-}
-.djs-context-pad .parallel-gateway.entry:hover {
-    background: url($parallel-gateway) center no-repeat !important;
-    background-size: cover !important;
-}
-.djs-context-pad .exclusive-gateway.entry:hover {
-    background: url($exclusive-gateway) center no-repeat !important;
-    background-size: cover !important;
-}
-.djs-context-pad .inclusive-gateway.entry:hover {
-    background: url($inclusive-gateway) center no-repeat !important;
-    background-size: cover !important;
-}
-.djs-context-pad .delete.entry:hover {
-    background: url($delete) center no-repeat !important;
-    background-size: cover !important;
-}
-.djs-context-pad .entry:hover {
-    border: 1px solid $baseColor;
+.icon-pad .user-task {
+    background-image: url($user-task);
 }
 
-.djs-context-pad .entry {
-    box-sizing: border-box;
-    background-size: 100%;
-    transition: all 0.3s;
+.icon-pad {
+    .user-task {
+        background-image: url($user-task);
+    }
+    @each $name, $url in
+                    (user-task, $user-task),
+                    (end-event, $end-event),
+                    (parallel-gateway, $parallel-gateway),
+                    (exclusive-gateway, $exclusive-gateway),
+                    (inclusive-gateway, $inclusive-gateway),
+                    (connection-tool, $connection-tool),
+                    (delete, $delete) {
+        .#{$name}.entry {
+            background-image: url($url);
+        }
+        .#{$name}.entry:hover {
+            background: url($url) center no-repeat !important;
+            background-size: cover !important;
+        }
+    }
 }
 
-.djs-palette .entry {
-    float: none!important;
-    position: relative;
-}
-
-.djs-palette .entry, .djs-palette .djs-palette-toggle {
-    cursor: pointer!important;
-    width: 35px!important;
-    height: 35px!important;
-}
-
-.djs-palette .entry:before {
-    color: $baseColor!important;
-}
 
 .djs-palette {
     width: 150px!important;
     bottom: 20px;
     overflow: auto;
+    box-shadow: 4px 4px 10px #CCCCCC;
+    .entry {
+        float: none!important;
+        position: relative;
+        cursor: pointer!important;
+        width: 35px!important;
+        height: 35px!important;
+    }
+    .entry:before {
+        color: $baseColor!important;
+    }
+}
+
+.bjs-powered-by {
+    display: none;
 }

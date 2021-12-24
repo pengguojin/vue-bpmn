@@ -31,39 +31,55 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
         create,
         elementFactory,
         translate,
-        modeling
+        modeling,
+        connect
     } = this;
 
     const actions = {};
 
     assign(actions, {
         'append.user-task': createAction(
-            'bpmn:UserTask', 'task', 'icon-custom user-task',
-            translate('创建一个用户任务')
+            'bpmn:UserTask', 'task', 'icon-pad user-task',
+            '创建一个用户任务'
         )
     }, {
         'append.end-event': createAction(
-            'bpmn:EndEvent', 'event', 'icon-custom end-event',
-            translate('创建一个结束节点')
+            'bpmn:EndEvent', 'event', 'icon-pad end-event',
+            '创建一个结束节点'
         )
     }, {
         'append.parallel-gateway': createAction(
-            'bpmn:ParallelGateway', 'gateway', 'icon-custom parallel-gateway',
-            translate('创建一个并行网关')
+            'bpmn:ParallelGateway', 'gateway', 'icon-pad parallel-gateway',
+            '创建一个并行网关'
         )
     }, {
         'append.exclusive-gateway': createAction(
-            'bpmn:ExclusiveGateway', 'gateway', 'icon-custom exclusive-gateway',
-            translate('创建一个排他网关')
+            'bpmn:ExclusiveGateway', 'gateway', 'icon-pad exclusive-gateway',
+            '创建一个排他网关'
         )
     }, {
         'delete': deleteElement()
+    }, {
+        'connect': {
+            group: 'group',
+            className: 'icon-custom connection-tool',
+            title: '连线工具',
+            action: {
+                click: startConnect,
+                dragstart: startConnect
+            }
+        }
     })
+
+    // 连线
+    function startConnect(event, element) {
+        connect.start(event, element);
+    }
 
     // 删除功能
     function deleteElement() {
         return {
-            group: 'edit',
+            group: 'group',
             className: 'icon-custom delete',
             title: translate('删除'),
             action: {
@@ -93,7 +109,7 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
         return {
             group: group,
             className: className,
-            title: title,
+            title: translate(title),
             action: { dragstart, click }
         };
     }

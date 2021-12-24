@@ -1,20 +1,11 @@
 <template>
   <div id="app">
-    <basic />
+    <router-view />
   </div>
 </template>
 
 <script>
-import Basic from './components/basic'
-
 export default {
-  name: 'App',
-  components: {
-    Basic
-  }
+  name: 'App'
 }
 </script>
-
-<style>
-
-</style>

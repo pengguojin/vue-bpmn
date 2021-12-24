@@ -66,10 +66,6 @@ PaletteProvider.prototype.getPaletteEntries = function() {
         });
     }
 
-    function createParticipant(event) {
-        create.start(event, elementFactory.createParticipantShape());
-    }
-
     const actions = {};
     assign(actions, {
         'hand-tool': {
@@ -144,32 +140,15 @@ PaletteProvider.prototype.getPaletteEntries = function() {
         },
         'create.group': createAction(
             'bpmn:Group', 'artifact', 'icon-custom group',
-            translate('创建组')
-        ),
-        'create.data-object': createAction(
-            'bpmn:DataObjectReference', 'data-object', 'bpmn-icon-data-object',
-            translate('创建数据对象引用')
-        ),
-        'create.data-store': createAction(
-            'bpmn:DataStoreReference', 'data-store', 'icon-custom datasource',
-            translate('创建数据库')
+            '创建组'
         ),
         'create.subprocess-expanded': {
-            group: 'group',
-            className: 'bpmn-icon-subprocess-expanded',
+            group: 'artifact',
+            className: 'icon-custom subprocess',
             title: translate('创建扩展子流程'),
             action: {
                 dragstart: createSubprocess,
                 click: createSubprocess
-            }
-        },
-        'create.participant-expanded': {
-            group: 'collaboration',
-            className: 'bpmn-icon-participant',
-            title: translate('创建池/参与者'),
-            action: {
-                dragstart: createParticipant,
-                click: createParticipant
             }
         }
     })
