@@ -9,7 +9,7 @@ const routes = [{
     {
         path: '/b',
         component: () =>
-            import ('../components/basic')
+            import ('../views/main')
     }
 ]
 
